@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { signIn, useSession, signOut } from 'next-auth/client'
 
@@ -10,7 +10,9 @@ import styles from './styles.module.scss'
 const SigninButton = () => {
     const [session] = useSession()
 
-    console.log(session)
+    useEffect(()=>{
+        console.log('session', session)
+    },[session])
 
     return session ?(
         <button 
@@ -18,7 +20,7 @@ const SigninButton = () => {
             className={styles.signInButton}
         >
             <FaGithub color="#04D361"/>
-                <p> Filipe Pfluck</p>
+                <p> {session.user.name}</p>
             <FiX 
                 color="#737380" 
                 style={{marginLeft: 8}}
