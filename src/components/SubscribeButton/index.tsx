@@ -4,6 +4,7 @@ import styles from './style.module.scss'
 
 import api from '../../services/api'
 import getStripeJs from '../../services/stripe-js'
+import { useRouter } from 'next/router'
 
 interface SubscribeButtonProps {
     priceId: string
@@ -12,10 +13,17 @@ interface SubscribeButtonProps {
 const SubscribeButton: React.FC<SubscribeButtonProps> = ({priceId}) => {
     const [session] = useSession()
 
+    const { push } = useRouter()
+
     const handleSubscribe = useCallback(async ()=>{
         if(!session){
             signIn('github')
             return
+        }
+
+        if(session.activeSubscription){
+            push('/posts')
+            return 
         }
 
         try{

@@ -1,6 +1,11 @@
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+
 import SigninButton from '../SignInButton'
 
 import styles from './styles.module.scss'
+
+import { ActiveLink } from '../ActiveLink'
 
 const Header = () => {
     return (
@@ -8,8 +13,12 @@ const Header = () => {
             <div className={styles.headerContent}>
                 <img src="/logo.svg" alt="Ignews"/>
                 <nav >
-                    <a href="" className={styles.active}>Home</a>
-                    <a href="">Posts</a>
+                    <ActiveLink activeClassName={styles.active} href="/">
+                        <a>Home</a>
+                    </ActiveLink>
+                    <ActiveLink activeClassName={styles.active} href="/posts">
+                        <a>Posts</a>
+                    </ActiveLink>
                 </nav>
                 <SigninButton/>
             </div>
