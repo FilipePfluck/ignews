@@ -1,12 +1,20 @@
 .contentContainer {
     max-width: 1120px;
     margin: 0 auto;
-    padding: 0 2rem;
     height: calc(100vh - 5rem);
+    padding: 2rem;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+
+    @media (max-width: 900px){
+        justify-content: center;
+
+        img{
+            display: none;
+        }
+    }
 }
 
 .hero{
