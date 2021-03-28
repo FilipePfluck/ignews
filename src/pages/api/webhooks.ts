@@ -24,9 +24,9 @@ export const config = {
 
 const relevantEvents = new Set([
     'checkout.session.completed',
-    'checkout.session.created',
-    'checkout.session.updated',
-    'checkout.session.deleted',
+    'customer.subscription.created',
+    'customer.subscription.updated',
+    'customer.subscription.deleted',
 ])
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -51,6 +51,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     case 'customer.subscription.updated':
                     case 'customer.subscription.deleted':
                         const subscription = event.data.object as Stripe.Subscription
+
+                        console.log('webhook ouvido')
 
                         await saveSubscription(
                             subscription.id,
